@@ -1,0 +1,32 @@
+#editor
+{
+position: absolute;
+width: 1000px;
+height: 550px;
+top: 125px;
+right: 0;
+bottom: 255px;
+left: 287px;
+border:1px solid gray;
+}
+#terminal
+{
+position: absolute;
+width: 1000px;
+height: 245px;
+top: 680px;
+bottom: 0;
+right: 0;
+left: 287px;
+border:1px solid gray;
+}
+#directory
+{
+position: absolute;
+left: 12px;
+top: 125px;
+botom: 0;
+height: 550px;
+width: 255px;
+border:1px solid gray;
+}
