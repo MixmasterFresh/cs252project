@@ -1,0 +1,4 @@
+<td><img src="http://<%=server.hosname.split('.')[-2]%>.<%=server.hosname.split('.')[-1]%>/favicon.ico" onerror="this.src='imagenotfound.gif';" /></td>
+<td><h3><%= server.hostname %></h3></td>
+<td><%= link_to "edit", edit_server_path(server.id) %></td>
+<td><%= link_to "delete", server_path(server.id), :method => :delete %></td>

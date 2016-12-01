@@ -1,0 +1,19 @@
+<div class="container">
+  <div class="row">
+    <h3>My Servers</h3>
+    <div class="column">
+      <table class="table">
+        <tbody>
+          <% current_user.servers.each do |server| %>
+            <tr>
+              <%= render server %>
+            </tr>
+          <% end %>
+          <tr>
+            <td><%= link_to "Add new server...", new_server_path %></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
