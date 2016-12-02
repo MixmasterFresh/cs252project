@@ -8,16 +8,21 @@
 <body>
 	<h1> CS252 editor with a terminal </h1>
 	
-	<div id="editor">
-       <p>Here is Editor </p>
-    </div>
-     <div id="terminal">
-       <p>This is the Terminal</p>
-      </div>
-      <div id="directory">
-       <p>here is the list of directories and files</p>
-      </div>
+<!-- Include gateone.js somewhere on your page -->
+<script src="https://localhost:8000/static/gateone.js"></script>
 
-      <script src="./fs.js"></script>
+<!-- Decide where you want to put Gate One -->
+<div id="gateone_container" style="position: relative; width: 60em; height: 30em;">
+    <div id="gateone"></div>
+</div>
+
+<!-- Call GateOne.init() at some point after the page is done loading -->
+<script>
+window.onload = function() {
+    // Initialize Gate One:
+    GateOne.init({url: 'https://localhost:8000'});
+}
+</script>
+<!-- That's it! -->
 </body>
-</html>>
+</html>
