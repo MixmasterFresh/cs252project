@@ -66,7 +66,7 @@ class FilesystemController < ApplicationController
     Thread.current[:user_connections][user.id][server.id]
   end
 
-  class BackdoorObject << self
+  class BackdoorObject
     @id = 1234
   end
 end
