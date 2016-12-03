@@ -1,6 +1,7 @@
 applications:
 - path: .
   memory: 256M
+  command: bundle exec rake db:setup && bundle exec rails s -p $PORT
   instances: 1
   domain: mybluemix.net
   name: cs252share
