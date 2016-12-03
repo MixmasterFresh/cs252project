@@ -1,0 +1,11 @@
+applications:
+- path: .
+  memory: 256M
+  instances: 1
+  domain: mybluemix.net
+  name: cs252share
+  host: cs252share
+  disk_quota: 1024M
+  services:
+  - availability-monitoring-auto
+  - ElephantSQL-xy
