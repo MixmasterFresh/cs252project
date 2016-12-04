@@ -1,0 +1,13 @@
+<h2>New Server<h2>
+<%= form_for @server, url: servers_path, html: {class: "nifty_form"} do |f| %>
+  <p style="font-size: 1.5rem;">Name:<p>
+  <%= text_field(:server, :name, :required => true) %>
+  <br>
+  <p style="font-size: 1.5rem;">Username:<p>
+  <%= text_field(:server, :username, :required => true) %>
+  <br>
+  <p style="font-size: 1.5rem;">Hostname:<p>
+  <%= text_field(:server, :hostname, :required => true) %>
+  <br>
+  <%= f.submit "Create" %>
+<% end %>

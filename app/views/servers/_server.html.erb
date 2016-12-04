@@ -1,4 +1,5 @@
-<td><img src="http://<%=server.hosname.split('.')[-2]%>.<%=server.hosname.split('.')[-1]%>/favicon.ico" onerror="this.src='imagenotfound.gif';" /></td>
+<td><img src="http://<%=server.hostname.split('.')[-2]%>.<%=server.hostname.split('.')[-1]%>/favicon.ico" onerror="this.src='notfound.png';" style="
+    height: 25px;width: 25px;"/></td>
 <td><h3><%= server.hostname %></h3></td>
 <td><%= link_to "edit", edit_server_path(server.id) %></td>
 <td><%= link_to "delete", server_path(server.id), :method => :delete %></td>

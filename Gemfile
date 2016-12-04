@@ -11,6 +11,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'net-sftp'
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'pry'
 end
 group :development do
   gem 'web-console'
