@@ -15,6 +15,11 @@ class ServersController < ApplicationController
     redirect_to servers_path
   end
 
+  def show
+    @server = Server.find(params[:id].to_i)
+    render :layout => false
+  end
+
 
 private
   def server_params
