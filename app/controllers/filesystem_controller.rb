@@ -6,12 +6,15 @@ class FilesystemController < ApplicationController
   # before_filter :authenticate_user!
 
   def login
-    if params['password'].nil?
+    if params['password'].nil? || urrent_user.servers.find(params[:id].to_i).nil?
       @thing = { login: 'bad' }
       render json: @thing
       return
     end
-    cookie_data = {:password => params['password']}
+
+    check_sftp_connection(current_user, current_user.servers.find(params[:id].to_i))
+    current_server = current_user.servers.find(params[:id].to_i)
+    cookie_data = {:password => params['password'], :hostname => current_server.hostname, :username => current_server.username}
     digest = 'SHA1'
     secret = 'cookiekey'
     data = Base64.encode64(Marshal.dump(cookie_data))
@@ -21,6 +24,10 @@ class FilesystemController < ApplicationController
     cookies.encrypted[:details] = final_output
     @thing = { login: 'good' }
     render json: @thing
+  rescue
+    @thing = { login: 'bad' }
+    render json: @thing
+    return
   end
 
   def peek
@@ -32,8 +39,8 @@ class FilesystemController < ApplicationController
     @contents['folders'] = []
     @contents['files'] = []
     sftp = nil
-    if current_user && params[:id].to_i != 1234 #THIS IS A BACKDOOR
-      sftp = check_sftp_connection(current_user,current_user.servers.find(params[:id].to_i))
+    if current_user #THIS IS A BACKDOOR
+      sftp = get_sftp_connection(current_user)
     else
       obj = BackdoorObject.new
       sftp = check_sftp_connection(obj,obj)
@@ -53,8 +60,8 @@ class FilesystemController < ApplicationController
 
   def open
     sftp = nil
-    if current_user && params[:id].to_i != 1234  #THIS IS A BACKDOOR
-      sftp = check_sftp_connection(current_user,current_user.servers.find(id: params[:id].to_i))
+    if current_user  #THIS IS A BACKDOOR
+      sftp = get_sftp_connection(current_user)
     else
       obj = BackdoorObject.new
       sftp = check_sftp_connection(obj,obj)
@@ -67,8 +74,8 @@ class FilesystemController < ApplicationController
 
   def save
     sftp = nil
-    if current_user && params[:id].to_i != 1234  #THIS IS A BACKDOOR
-      sftp = check_sftp_connection(current_user,current_user.servers.find(id: params[:id].to_i))
+    if current_user  #THIS IS A BACKDOOR
+      sftp = get_sftp_connection(current_user)
     else
       obj = BackdoorObject.new
       sftp = check_sftp_connection(obj,obj)
@@ -89,17 +96,21 @@ class FilesystemController < ApplicationController
 
   def check_sftp_connection(user, server)
     Thread.current[:user_connections] ||= {}
-    Thread.current[:user_connections][user.id] ||= {}
     if server.port.nil?
       port = 22
     else
       port = server.port
     end
-    unless Thread.current[:user_connections][user.id][server.id]
+    unless Thread.current[:user_connections][user.id]
       session = Net::SSH.start(server.hostname, server.username, :password => get_login()[:password], :port => port, :auth_methods => [ 'password' ],:number_of_password_prompts => 0)
-      Thread.current[:user_connections][user.id][server.id] = Net::SFTP::Session.new(session).connect!
+      Thread.current[:user_connections][user.id] = Net::SFTP::Session.new(session).connect!
     end
-    Thread.current[:user_connections][user.id][server.id]
+    Thread.current[:user_connections][user.id]
+  end
+
+  def get_sftp_connection
+    Thread.current[:user_connections] ||= {}
+    Thread.current[:user_connections][user.id]
   end
 
   class BackdoorObject
