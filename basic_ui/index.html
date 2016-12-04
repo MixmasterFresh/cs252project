@@ -11,11 +11,6 @@
 <!-- Include gateone.js somewhere on your page -->
 <script src="https://localhost:8000/static/gateone.js"></script>
 
-<!-- Decide where you want to put Gate One -->
-<div id="gateone_container" style="position: relative; width: 60em; height: 30em;">
-    <div id="gateone"></div>
-</div>
-
 <!-- Call GateOne.init() at some point after the page is done loading -->
 <script>
 window.onload = function() {
@@ -24,5 +19,11 @@ window.onload = function() {
 }
 </script>
 <!-- That's it! -->
+
+<!-- Decide where you want to put Gate One -->
+<div id="gateone_container" style="position: relative; width: 60em; height: 30em;">
+    <div id="gateone"></div><form id="go_embed1" style="background-color: #fff; color: #000; text-align: center;">Enter the URL for your Gate One server<br><br><p><input name="gourl1" id="gourl1" size=40 placeholder="https://your-gateone-server/" /><input type="submit" value="Go!" style="margin-left: .5em;" /></p></form></div>
+</div>
+
 </body>
 </html>
