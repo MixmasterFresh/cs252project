@@ -1,0 +1,9 @@
+<h1>Server Login</h1>
+
+<p style="font-size: 1.5rem;"><%=@server.username%><%=@server.hostname%></p>
+
+<%= form_tag("/filesystem_login/"+@server.id.to_s, method: "post") do %>
+  <%= label_tag(:password, "Password:",style: "font-size: 1.5rem;") %>
+  <%= password_field_tag(:password) %>
+  <%= submit_tag("Login") %>
+<% end %>

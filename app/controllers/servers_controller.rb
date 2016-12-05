@@ -20,6 +20,10 @@ class ServersController < ApplicationController
     render :layout => false
   end
 
+  def login
+    @server = Server.find(params[:id].to_i)
+  end
+
 
 private
   def server_params

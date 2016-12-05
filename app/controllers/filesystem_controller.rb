@@ -6,13 +6,11 @@ class FilesystemController < ApplicationController
   # before_filter :authenticate_user!
 
   def login
-    binding.pry
     if params['password'].nil? || current_user.servers.find(params[:id].to_i).nil?
-      @thing = { login: 'bad' }
-      render json: @thing
+      flash[:error] = 'Login failed'
+      redirect_to :back
       return
     end
-    binding.pry
     current_server = current_user.servers.find(params[:id].to_i)
     cookie_data = {:password => params['password']}
     cookies[:hostname] = current_server.hostname
@@ -25,11 +23,10 @@ class FilesystemController < ApplicationController
     final_output = "#{escaped_data_value}--#{digest_value}"
     cookies.encrypted[:details] = final_output
     check_sftp_connection(current_user, current_user.servers.find(params[:id].to_i))
-    @thing = { login: 'good' }
-    render json: @thing
+    redirect_to server_path(params[:id])
   rescue
-    @thing = { login: 'bad' }
-    render json: @thing
+    flash[:error] = 'Login failed'
+    redirect_to :back
     return
   end
 
@@ -56,7 +53,7 @@ class FilesystemController < ApplicationController
       temp = {}
       temp['name'] = entry.name
       temp['path'] = folder+"/"+entry.name
-      if entry.name[0] != '.'
+      if entry.name != '.' && entry.name != '..'
         if entry.directory?
           @contents << build_folder(temp["name"],temp["path"])
         else

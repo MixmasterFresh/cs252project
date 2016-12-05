@@ -13,10 +13,10 @@
   <script src="/libs/angular-route/angular-route.min.js"></script>
 
   <script src="/libs/jquery/dist/jquery.min.js"></script>
-  <script
+  <%#<script
   src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"
   integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU="
-  crossorigin="anonymous"></script>
+  crossorigin="anonymous"></script>%>
   <script src="/jstree/jstree.min.js"></script>
 
   <script src="/libs/jstree-directive/jsTree.directive.js"></script>
@@ -27,12 +27,12 @@
   
 
 </head>
-<div id="hognog" title="Basic dialog">
+<%#<div id="hognog" title="Basic dialog">
 <input type="password" size="25" id="wowowow"/>
 <button id="lololol">asdfasdf</button>
-</div>
+</div>%>
 
-<script>
+<%#<script>
 		jQuery( "#hognog" ).dialog();
 		document.getElementById("lololol").onclick = function () { 
 
@@ -46,7 +46,7 @@
 			}
 		});
 		};
-	</script>
+	</script>%>
 <div ng-controller="HomeCtrl" ng-init="init(<%= @server.id %>)">
 <body class="container">
   <h1>File Browser App  <p class="pull-right"><a href="http://thejackalofjavascript.com/file-browser-with-jstree-angularjs-and-expressjs" target="_blank" class="btn btn-info">Tutorial</a></p></h1>
