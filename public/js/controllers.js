@@ -7,6 +7,7 @@
 
       $scope.init = function(server_id) {
         $scope.server_id = server_id;
+        $http.post('file_system/' + server_id);
         console.log(server_id);
       }
 
