@@ -37,13 +37,7 @@
             }
             $scope.fileViewer = _d;
           });
-        } else {
-
-          //http://jimhoskins.com/2012/12/17/angularjs-and-apply.html//
-          $scope.$apply(function() {
-            $scope.fileViewer = 'Please select a file to view its contents';
-          });
-        }
+        } 
       };
     }
   ]);
