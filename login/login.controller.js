@@ -12,7 +12,7 @@
         function login() {
             vm.dataLoading = true;
             function Login(vm.username, vm.password) {
-                $http.post($location, JSON.stringify( { user: vm.uservm, passward: vm.password }))
+                $http.post($location.path(), JSON.stringify( { user: vm.uservm, passward: vm.password }))
                 .then(function(response){
                     if(response.data[1] === 'success' || 'good'){
                         $location.path('/home');
