@@ -9,30 +9,17 @@
       ></js-tree>
     </div>
     <div class="col-md-8 file-viewer">
-      <pre><code>{{fileViewer}}</pre></code>
-    <style type="text/css" media="screen">
-                #editor { 
-                position: absolute;
-                top: 0;
-                right: 0;
-                bottom: 0;
-                left: 0;
-                }
-            </style>
-      <div id="editor">{{fileViewer}}</div>
-          
-      <script>
-          var editor = ace.edit("editor");
-          editor.setTheme("ace/theme/monokai");
-          editor.getSession().setMode("ace/mode/javascript");
-      </script>
-
-      </div>
-          
-      
-      
-
-
+	<script>
+	    document.getElementById("col-md-8 file-viewer").innerHTML = "insert file contents here";
+	    var editor = ace.edit("col-md-8 file-viewer");
+	    editor.setTheme("ace/theme/monokai");
+	    editor.getSession().setMode("ace/mode/c_cpp");
+	    <!--$.ajax({
+		url : "url for remote server",
+		type: "POST",
+		data: JSON.stringify(document.getElementById("col-md-8 file-viewer").innerHTML)
+	    });-->
+	</script>
     </div>
   </div>
 
