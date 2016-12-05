@@ -13,7 +13,10 @@ ngJSTree.directive('jsTree', ['$http', function($http) {
     restrict: 'EA',
     fetchResource: function(url, cb) {
       return $http.get(url).then(function(data) {
-        if (cb) cb(data.data);
+        if (cb) {
+          cb(data.data);
+          console.log(data);
+        }
       });
     },
 

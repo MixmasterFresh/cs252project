@@ -6,7 +6,7 @@
       var _factory = {};
 
       _factory.fetchFile = function(file) {
-        return $http.post(encodeURIComponent(file));
+        return $http.post('/open', { file: file});
       };
 
       return _factory;

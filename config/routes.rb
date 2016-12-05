@@ -5,7 +5,7 @@ Rails.application.routes.draw do
   resources :users
   resources :server
   post '/filesystem_login/:id', to: 'filesystem#login'
-  post '/peek', to: 'filesystem#peek'
+  get '/peek', to: 'filesystem#peek'
   post '/open', to: 'filesystem#open'
   post '/save', to: 'filesystem#save'
 end
