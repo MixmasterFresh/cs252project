@@ -14,7 +14,7 @@
             function Login(vm.username, vm.password) {
                 $http.post($location, JSON.stringify( { user: vm.uservm, passward: vm.password }))
                 .then(function(response){
-                    if(response[1] === 'success' || 'good'){
+                    if(response.data[1] === 'success' || 'good'){
                         $location.path('/home');
                     }
                      else {
