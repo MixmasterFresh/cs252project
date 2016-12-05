@@ -6,11 +6,13 @@ class FilesystemController < ApplicationController
   # before_filter :authenticate_user!
 
   def login
+    binding.pry
     if params['password'].nil? || current_user.servers.find(params[:id].to_i).nil?
       @thing = { login: 'bad' }
       render json: @thing
       return
     end
+    binding.pry
     current_server = current_user.servers.find(params[:id].to_i)
     cookie_data = {:password => params['password']}
     cookies[:hostname] = current_server.hostname
@@ -111,9 +113,18 @@ class FilesystemController < ApplicationController
     end
   end
 
+  def has_password
+    if cookies.encrypted[:details].nil? || get_login()[:password].nil?
+      return false
+    end
+    return true
+  end
+
   def check_sftp_connection(user, server)
     Thread.current[:user_connections] ||= {}
-
+    if !has_password
+      return nil
+    end
     if server.port.nil?
       port = 22
     else
@@ -128,6 +139,12 @@ class FilesystemController < ApplicationController
 
   def get_sftp_connection(user)
     Thread.current[:user_connections] ||= {}
+    if !has_password
+      return nil
+    end
+    if get_login()[:password].nil?
+      return nil
+    end
     unless Thread.current[:user_connections][user.id]
       session = Net::SSH.start(cookies[:hostname], cookies[:username], :password => get_login()[:password], :port => 22, :auth_methods => [ 'password' ],:number_of_password_prompts => 0)
       Thread.current[:user_connections][user.id] = Net::SFTP::Session.new(session).connect!

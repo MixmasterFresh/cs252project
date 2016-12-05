@@ -1,14 +1,4 @@
-<head>
-<style type="text/css" media="screen">
-    #editor { 
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-</style>
-</head>
+
 
 <div ng-controller="HomeCtrl">
   <div class="row">
@@ -21,18 +11,7 @@
       ></js-tree>
     </div>
     <div class="col-md-8 file-viewer">
-	<div id="editor"></div>
-	<script>
-	    document.getElementById("editor").innerHTML = "insert file contents here";
-	    var editor = ace.edit("editor");
-	    editor.setTheme("ace/theme/monokai");
-	    editor.getSession().setMode("ace/mode/c_cpp");
-	    $.ajax({
-		url : "url for remote server",
-		type: "POST",
-		data: JSON.stringify(document.getElementById("editor").innerHTML)
-	    });
-	</script>
+	<pre><code>{{fileViewer}}</pre></code>
     </div>
   </div>
 
