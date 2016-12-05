@@ -33,6 +33,7 @@
             if (typeof _d == 'object') {
 
               //http://stackoverflow.com/a/7220510/1015046//
+              //format the file/string to be human readable
               _d = JSON.stringify(_d, undefined, 2);
             }
             $scope.fileViewer = _d;
